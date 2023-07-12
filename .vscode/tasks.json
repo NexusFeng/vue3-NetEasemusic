@@ -2,15 +2,12 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "自动执行脚本",
-      "type": "shell",
-      "command": "nvm use 14.20.0",
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "runOptions": {
-        "runOn": "folderOpen"
-      }
+      "type": "npm",
+      "script": "dev",
+      "problemMatcher": [],
+      "label": "npm: dev",
+      "detail": "vite --port 3333 --open",
+      "command": "zsh -i -c 'nvm use 14.20.0 && npm run dev'",
     }
   ]
 }
