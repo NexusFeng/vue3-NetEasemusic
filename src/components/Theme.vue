@@ -1,10 +1,8 @@
 <script setup lang='ts'>
-/**
- * @file 皮肤切换弹窗
- * @author xiatao<1126084777@qq.com>
- */
-import useAppStore from '../modules/pinia/modules/app'
-import { BlackVariables, RedVariables, whiteVariables } from '../config/variables'
+import useAppStore from '~/modules/pinia/modules/app'
+import BlackVariables from '~/styles/theme/black'
+import RedVariables from '~/styles/theme/red'
+import whiteVariables from '~/styles/theme/white'
 
 withDefaults(defineProps<{ modelValue: boolean }>(), {
   modelValue: false,
@@ -26,16 +24,16 @@ interface ThemeData {
 
 const themes: ThemeData[] = [
   {
-    name: t('theme.white'),
-    key: 'white',
-    color: '#F9F9F9',
-    variables: whiteVariables,
-  },
-  {
     name: t('theme.red'),
     key: 'red',
     color: '#d33a31',
     variables: RedVariables,
+  },
+  {
+    name: t('theme.white'),
+    key: 'white',
+    color: '#F9F9F9',
+    variables: whiteVariables,
   },
   {
     name: t('theme.black'),
@@ -52,6 +50,10 @@ const changeTheme = (index: number) => {
     document.documentElement.style.setProperty(key, variables[key])
   })
 }
+
+onMounted(() => {
+  changeTheme(0)
+})
 </script>
 
 <template>

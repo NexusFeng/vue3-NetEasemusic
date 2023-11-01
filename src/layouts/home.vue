@@ -1,3 +1,9 @@
+<script lang="ts" setup>
+import Header from './Header.vue'
+import Nav from './Nav.vue'
+import Footer from './Footer.vue'
+</script>
+
 <template>
   <div class="min-h-screen flex flex-col bg-var(--global-bg-color)">
     <Header />

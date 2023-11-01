@@ -4,8 +4,8 @@ import installPlugins from './modules'
 
 import '@unocss/reset/tailwind.css'
 import './styles/main.css'
-import './styles/theme.css'
 import 'uno.css'
+import '~/utils/ rem'
 
 function bootstrap() {
   const app = createApp(App)
