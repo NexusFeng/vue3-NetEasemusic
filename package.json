@@ -42,7 +42,7 @@
     "@antfu/eslint-config": "^0.36.0",
     "@commitlint/cli": "^17.4.4",
     "@commitlint/config-conventional": "^17.4.4",
-    "@iconify-json/carbon": "^1.1.16",
+    "@icon-park/vue-next": "^1.4.2",
     "@intlify/vite-plugin-vue-i18n": "^6.0.3",
     "@ls-lint/ls-lint": "^1.11.2",
     "@types/lodash-es": "^4.17.10",

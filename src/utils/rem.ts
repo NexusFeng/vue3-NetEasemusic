@@ -4,7 +4,7 @@ export const remBase = 14
 
 // let htmlFontSize;
 
-export const ResizeListener = () => {
+export const ResizeListener = (): void => {
   const calc = () => {
     const maxFontSize = 18
     const minFontSize = 14

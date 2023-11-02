@@ -4,7 +4,7 @@ specifiers:
   '@antfu/eslint-config': ^0.36.0
   '@commitlint/cli': ^17.4.4
   '@commitlint/config-conventional': ^17.4.4
-  '@iconify-json/carbon': ^1.1.16
+  '@icon-park/vue-next': ^1.4.2
   '@intlify/vite-plugin-vue-i18n': ^6.0.3
   '@ls-lint/ls-lint': ^1.11.2
   '@types/lodash-es': ^4.17.10
@@ -69,7 +69,7 @@ devDependencies:
   '@antfu/eslint-config': 0.36.0_ycpbpc6yetojsgtrx3mwntkhsu
   '@commitlint/cli': 17.4.4
   '@commitlint/config-conventional': 17.4.4
-  '@iconify-json/carbon': 1.1.16
+  '@icon-park/vue-next': 1.4.2_vue@3.2.47
   '@intlify/vite-plugin-vue-i18n': 6.0.3_vite@4.1.4+vue-i18n@9.2.2
   '@ls-lint/ls-lint': 1.11.2
   '@types/lodash-es': 4.17.10
@@ -917,10 +917,13 @@ packages:
     engines: {node: '>=6.9.0'}
     dev: true
 
-  /@iconify-json/carbon/1.1.16:
-    resolution: {integrity: sha512-AD8bcnRSGA0WfcGEass2FbA0sagrUzrpFx5WchuDy3uf7yKBWumdypdQK121DH321fQDl5+zZQ26T6gC9knwUQ==}
+  /@icon-park/vue-next/1.4.2_vue@3.2.47:
+    resolution: {integrity: sha512-+QklF255wkfBOabY+xw6FAI0Bwln/RhdwCunNy/9sKdKuChtaU67QZqU67KGAvZUTeeBgsL+yaHHxqfQeGZXEQ==}
+    engines: {node: '>= 8.0.0', npm: '>= 5.0.0'}
+    peerDependencies:
+      vue: 3.x
     dependencies:
-      '@iconify/types': 2.0.0
+      vue: 3.2.47
     dev: true
 
   /@iconify/types/2.0.0:

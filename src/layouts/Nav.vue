@@ -6,6 +6,5 @@
     <div>
       登录
     </div>
-    <div />
   </div>
 </template>
