@@ -5,7 +5,7 @@ import installPlugins from './modules'
 import '@unocss/reset/tailwind.css'
 import './styles/main.css'
 import 'uno.css'
-import '~/utils/ rem'
+import { ResizeListener } from '~/utils/rem'
 
 function bootstrap() {
   const app = createApp(App)
@@ -14,3 +14,4 @@ function bootstrap() {
 }
 
 bootstrap()
+ResizeListener()
