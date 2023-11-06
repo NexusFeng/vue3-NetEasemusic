@@ -11,6 +11,13 @@ const router = createRouter({
   routes,
 })
 
+router.beforeEach((to, from, next) => {
+  if (to.path === '/')
+    next('/SongList/discovery')
+  else
+    next()
+})
+
 export const install = (app: App) => {
   initGuards(router)
   app.use(router)
