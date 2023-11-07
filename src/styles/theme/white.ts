@@ -24,4 +24,6 @@ export default {
   '--footer-border-color': '#F5F5F5',
   /* popover弹窗背景颜色 */
   '--popover-bg-color': '#FFFFFF',
+  '--menu-item-hover-bg': '#e7e7e7',
+  '--menu-item-active-bg': '#e2e2e2',
 }

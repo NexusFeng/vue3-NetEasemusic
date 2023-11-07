@@ -2,12 +2,14 @@ import type { App } from 'vue'
 import {
   Github,
   Left,
+  Music,
   MusicCd,
   MusicMenu,
   Right,
   Search,
   Theme,
   User,
+  Video,
 } from '@icon-park/vue-next'
 
 export interface Icons {
@@ -23,6 +25,8 @@ export const icons: Icons = {
   IconUser: User,
   IconMusicCd: MusicCd,
   IconMusicMenu: MusicMenu,
+  IconMusic: Music,
+  IconVideo: Video,
 }
 export const install = (app: App) => {
   for (const key of Object.keys(icons))

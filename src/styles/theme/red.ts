@@ -1,5 +1,7 @@
 // 红色皮肤变量
+import whiteTheme from './white'
 export default {
+  ...whiteTheme,
   /* 全局背景 */
   '--global-bg-color': '#FFFFFF',
   /* 左侧nav菜单背景 */

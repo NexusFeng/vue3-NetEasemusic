@@ -13,7 +13,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.path === '/')
-    next('/SongList/discovery')
+    next('/song-list/discovery')
   else
     next()
 })
