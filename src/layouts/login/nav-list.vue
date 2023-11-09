@@ -1,37 +1,34 @@
 <script lang="ts" setup>
-const router = useRouter()
-const go = (name: string) => {
-  router.push(`/song-list/${encodeURIComponent(name)}`)
-}
 const fixedList = [
   { key: 'discovery', name: '发现音乐' },
   { key: 'recommend', name: '推荐歌单' },
   { key: 'newest-music', name: '最新音乐' },
   { key: 'newest-mv', name: '最新MV' },
 ]
-// const activeBg = 'text-var(--header-font-color)'
-// const itemClass = ['', '', '', '']
-const updateParams = (params: any) => {
-  // const curPath = params.split('/').reverse()[0]
+
+const menuItem = ref<Element[]>([])
+const router = useRouter()
+const go = (name: string, index: number) => {
+  menuItem.value.forEach((ref: Element, idx: number) => {
+    if (index === idx)
+      ref.className += ' text-var(--theme-color) bg-var(--menu-item-active-bg)'
+    else
+      ref.classList.remove('text-var(--theme-color)', 'bg-var(--menu-item-active-bg)')
+  })
+  router.push(`/song-list/${encodeURIComponent(name)}`)
 }
-const stop = watch(
-  () => router.currentRoute.value.path,
-  params => updateParams(params),
-)
 
 onMounted(() => {
-  updateParams(router.currentRoute.value.path)
-})
-onUnmounted(() => {
-  stop()
+  menuItem.value[0].className += ' text-var(--theme-color) bg-var(--menu-item-active-bg)'
 })
 </script>
 
 <template>
   <div
-    v-for="item in fixedList" :key="item.key"
+    v-for="(item, index) in fixedList" :key="item.key"
+    ref="menuItem"
     class="flex items-center cursor-pointer p4 hover:bg-var(--menu-item-hover-bg)"
-    @click="go(item.key)"
+    @click="go(item.key, index)"
   >
     <IconMusicCd v-if="item.key === 'discovery'" class="w-24px" />
     <IconMusicMenu v-if="item.key === 'recommend'" class="w-24px" />

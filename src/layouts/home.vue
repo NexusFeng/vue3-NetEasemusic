@@ -5,7 +5,7 @@ import Footer from './Footer.vue'
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col bg-var(--global-bg-color)">
+  <div class="min-h-screen flex flex-col bg-var(--global-bg-color) text-var(--font-color)">
     <Header />
     <div class="flex justify-start flex-grow">
       <Nav />
