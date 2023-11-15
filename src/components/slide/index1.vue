@@ -1,10 +1,22 @@
 <script lang="ts" setup>
-import { carouselEmits, carouselProps } from './silde'
+// import { carouselEmits } from './slide'
 import { useSlide } from './use-slide'
 
-const props = defineProps(carouselProps)
-
-const emit = defineEmits(carouselEmits)
+const props = defineProps({
+  height: {
+    type: String,
+    default: '',
+  },
+  pauseOnHover: {
+    type: Boolean,
+    default: true,
+  },
+})
+// const isNumber = (val: any): val is number => typeof val === 'number'
+// const carouselEmits = {
+//   change: (current: number, prev: number) => [current, prev].every(isNumber),
+// }
+// const emit = defineEmits(carouselEmits)
 
 defineOptions({
   name: 'slide',
@@ -24,17 +36,13 @@ const {
   setActiveItem,
   prev,
   next,
-  PlaceholderItem,
   throttledArrowClick,
   throttledIndicatorHover,
-} = useSlide(props, emit)
+} = useSlide(props)
 
 defineExpose({
-  /** @description manually switch slide */
   setActiveItem,
-  /** @description switch to the previous slide */
   prev,
-  /** @description switch to the next slide */
   next,
 })
 </script>
@@ -71,12 +79,11 @@ defineExpose({
           <IconRight />
         </button>
       </transition>
-      <PlaceholderItem />
       <slot />
     </div>
     <ul class="slide-indicators">
       <li
-        v-for="(item, index) in items"
+        v-for="index in items.length"
         :key="index"
         class="slide-indicators-item" :class="[index === activeIndex ? 'opacity-100' : '',
         ]"

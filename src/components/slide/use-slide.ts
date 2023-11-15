@@ -1,20 +1,25 @@
 import { ref } from 'vue'
+import { throttle } from 'lodash-unified'
+import type { CarouselItemContext } from './type'
 import { useOrderedChildren } from '~/hooks/use-ordered-children'
 
-export const useSlide = (props) => {
+export const useSlide = (props: any) => {
   const {
     children: items,
   } = useOrderedChildren<CarouselItemContext>(
     getCurrentInstance()!,
     'slide',
   )
-
   // refs
   const activeIndex = ref(-1)
   const timer = ref<ReturnType<typeof setInterval> | null>(null)
   const hover = ref(false)
   const root = ref<HTMLDivElement>()
-  // const containerHeight = ref<number>(0)
+  const containerHeight = ref<number>(0)
+
+  const handleIndicatorClick = (index: number) => {
+    activeIndex.value = index
+  }
 
   function itemInStage(item: CarouselItemContext, index: number) {
     const _items = unref(items)
@@ -70,6 +75,12 @@ export const useSlide = (props) => {
     timer.value = setInterval(() => playSlides(), props.interval)
   }
 
+  const resetTimer = () => {
+    pauseTimer()
+    if (!props.pauseOnHover)
+      startTimer()
+  }
+
   const handleMouseEnter = () => {
     hover.value = true
     if (props.pauseOnHover)
@@ -81,27 +92,90 @@ export const useSlide = (props) => {
     startTimer()
   }
 
+  const containerStyle = computed(() => {
+    if (props.height !== 'auto') {
+      return {
+        height: props.height,
+      }
+    }
+    return {
+      height: `${containerHeight.value}px`,
+      overflow: 'hidden',
+    }
+  })
+
+  const resetItemPosition = (oldIndex?: number) => {
+    items.value.forEach((item, index) => {
+      item.translateItem(index, activeIndex.value, oldIndex)
+    })
+  }
+
+  const setActiveItem = (index: number | string) => {
+    if (typeof index === 'string') {
+      const filteredItems = items.value.filter(
+        item => item.props.name === index,
+      )
+      if (filteredItems.length > 0)
+        index = items.value.indexOf(filteredItems[0])
+    }
+    index = Number(index)
+    if (Number.isNaN(index) || index !== Math.floor(index))
+      return
+
+    const itemCount = items.value.length
+    const oldIndex = activeIndex.value
+    if (index < 0)
+      activeIndex.value = props.loop ? itemCount - 1 : 0
+    else if (index >= itemCount)
+      activeIndex.value = props.loop ? 0 : itemCount - 1
+    else
+      activeIndex.value = index
+
+    if (oldIndex === activeIndex.value)
+      resetItemPosition(oldIndex)
+
+    resetTimer()
+  }
+
+  const prev = () => {
+    setActiveItem(activeIndex.value - 1)
+  }
+
+  const next = () => {
+    setActiveItem(activeIndex.value + 1)
+  }
+
+  const throttledArrowClick = throttle(
+    (index: number) => {
+      setActiveItem(index)
+    },
+    300,
+    { trailing: true },
+  )
+
+  const handleIndicatorHover = (index: number) => {
+    if (props.trigger === 'hover' && index !== activeIndex.value)
+      activeIndex.value = index
+  }
+
+  const throttledIndicatorHover = throttle((index: number) => {
+    handleIndicatorHover(index)
+  }, 300)
+
   return {
     root,
     activeIndex,
-    arrowDisplay,
-    hasLabel,
     hover,
-    isCardType,
     items,
-    isVertical,
     containerStyle,
-    isItemsTwoLength,
     handleButtonEnter,
     handleButtonLeave,
-    handleIndicatorClick,
     handleMouseEnter,
     handleMouseLeave,
     setActiveItem,
     prev,
     next,
-    PlaceholderItem,
-    isTwoLengthShow,
+    handleIndicatorClick,
     throttledArrowClick,
     throttledIndicatorHover,
   }

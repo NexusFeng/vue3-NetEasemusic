@@ -1,10 +1,6 @@
 import type { ExtractPropTypes } from 'vue'
 
-export const carouselProps = defineProps({
-  initialIndex: {
-    type: Number,
-    default: 0,
-  },
+export const carouselProps = {
   height: {
     type: String,
     default: '',
@@ -50,8 +46,9 @@ export const carouselProps = defineProps({
     type: Boolean,
     default: true,
   },
-} as const)
+}
 
+export const isNumber = (val: any): val is number => typeof val === 'number'
 export const carouselEmits = {
   change: (current: number, prev: number) => [current, prev].every(isNumber),
 }
