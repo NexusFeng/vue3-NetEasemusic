@@ -1,6 +1,6 @@
 import type { ExtractPropTypes } from 'vue'
 
-export const carouselItemProps = {
+export const slideItemProps = {
   name: { type: String, default: '' },
   label: {
     type: [String, Number],
@@ -8,4 +8,4 @@ export const carouselItemProps = {
   },
 }
 
-export type CarouselItemProps = ExtractPropTypes<typeof carouselItemProps>
+export type SlideItemProps = ExtractPropTypes<typeof slideItemProps>

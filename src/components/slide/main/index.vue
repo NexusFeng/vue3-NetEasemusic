@@ -59,7 +59,7 @@ defineExpose({
         <button
           v-show="hover"
           type="button"
-          class="carousel-arrow carousel-arrow-left"
+          class="carousel-arrow left-16px"
           @mouseenter="handleButtonEnter('left')"
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex - 1)"
@@ -71,7 +71,7 @@ defineExpose({
         <button
           v-show="hover"
           type="button"
-          class="carousel-arrow carousel-arrow-right"
+          class="carousel-arrow right-16px"
           @mouseenter="handleButtonEnter('right')"
           @mouseleave="handleButtonLeave"
           @click.stop="throttledArrowClick(activeIndex + 1)"
@@ -95,3 +95,7 @@ defineExpose({
     </ul>
   </div>
 </template>
+
+<style>
+@import url('./index.css');
+</style>

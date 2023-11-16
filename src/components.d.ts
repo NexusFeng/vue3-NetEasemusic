@@ -15,6 +15,8 @@ declare module '@vue/runtime-core' {
     GlobalSearch: typeof import('./components/global-search/GlobalSearch.vue')['default']
     Header: typeof import('./components/Header.vue')['default']
     Index1: typeof import('./components/slide/index1.vue')['default']
+    Index2: typeof import('./components/slide/index2.vue')['default']
+    Main: typeof import('./components/slide/main/index.vue')['default']
     Nav: typeof import('./components/Nav.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

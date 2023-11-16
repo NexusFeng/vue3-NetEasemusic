@@ -1,6 +1,6 @@
-import type { CarouselItemProps } from './item/type'
+import type { SlideItemProps } from '../item/type'
 
-export interface CarouselItemStates {
+export interface ItemStates {
   hover: boolean
   translate: number
   scale: number
@@ -10,9 +10,9 @@ export interface CarouselItemStates {
   animating: boolean
 }
 
-export interface CarouselItemContext {
-  props: CarouselItemProps
-  states: CarouselItemStates
+export interface ItemContext {
+  props: SlideItemProps
+  states: SlideItemStates
   uid: number
   translateItem: (index: number, activeIndex: number, oldIndex?: number) => void
 }

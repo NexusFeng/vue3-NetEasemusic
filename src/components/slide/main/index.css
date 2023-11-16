@@ -10,15 +10,7 @@
   @apply relative h-300px
 }
 .carousel-arrow {
- @apply border-none m-0 p-0 h-36px w-36px outline-0 cursor-pointer duration-300 rounded-50% absolute bg-gray-300 text-white top-50% z-10 translate-y--50% text-center text-12px
-}
-
-.carousel-arrow-left {
-  @apply left-16px
-}
-
-.carousel-arrow-right{
-  @apply right-16px
+ @apply border-none m-0 pl-10px h-36px w-36px outline-0 cursor-pointer duration-300 rounded-50% absolute bg-gray-300 text-white top-50% z-10 translate-y--50% text-center text-12px
 }
 
 .slide-indicators {
