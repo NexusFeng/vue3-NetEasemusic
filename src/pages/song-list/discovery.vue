@@ -1,14 +1,16 @@
 <script lang="ts" setup>
-import Slideshow from '~/components/slide/main/index.vue'
+import Carousel from '~/components/carousel/main/index.vue'
+import CarouselItem from '~/components/carousel/item/index.vue'
 </script>
 
 <template>
   <div class="py-18px px-32px">
-    <Slideshow height="300px">
-      <div>1</div>
-      <div>2</div>
-      <div>3</div>
-      <div>4</div>
-    </Slideshow>
+    <Carousel height="300px">
+      <CarouselItem v-for="item in 6" :key="item">
+        <h3 text="2xl" justify="center">
+          {{ item }}
+        </h3>
+      </CarouselItem>
+    </Carousel>
   </div>
 </template>

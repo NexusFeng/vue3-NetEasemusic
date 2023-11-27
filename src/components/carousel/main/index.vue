@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-// import { carouselEmits } from './slide'
-import { useSlide } from './use-slide'
+import { carouselEmits } from './type'
+import { useCarousel } from './use-carousel'
 
 const props = defineProps({
   height: {
@@ -12,14 +12,11 @@ const props = defineProps({
     default: true,
   },
 })
-// const isNumber = (val: any): val is number => typeof val === 'number'
-// const carouselEmits = {
-//   change: (current: number, prev: number) => [current, prev].every(isNumber),
-// }
-// const emit = defineEmits(carouselEmits)
+
+const emit = defineEmits(carouselEmits)
 
 defineOptions({
-  name: 'slide',
+  name: 'carousel',
 })
 
 const {
@@ -38,7 +35,7 @@ const {
   next,
   throttledArrowClick,
   throttledIndicatorHover,
-} = useSlide(props)
+} = useCarousel(props, emit)
 
 defineExpose({
   setActiveItem,
@@ -50,11 +47,11 @@ defineExpose({
 <template>
   <div
     ref="root"
-    class="slide"
+    class="carousel"
     @mouseenter.stop="handleMouseEnter"
     @mouseleave.stop="handleMouseLeave"
   >
-    <div class="slide-container" :style="containerStyle">
+    <div class="carousel-container" :style="containerStyle">
       <transition name="carousel-arrow-left">
         <button
           v-show="hover"
@@ -81,16 +78,16 @@ defineExpose({
       </transition>
       <slot />
     </div>
-    <ul class="slide-indicators">
+    <ul class="carousel-indicators">
       <li
         v-for="index in items.length"
         :key="index"
-        class="slide-indicators-item" :class="[index === activeIndex ? 'opacity-100' : '',
+        class="carousel-indicators-item" :class="[index === activeIndex ? 'opacity-100' : '',
         ]"
         @mouseenter="throttledIndicatorHover(index)"
         @click.stop="handleIndicatorClick(index)"
       >
-        <button class="slide-indicators-btn" />
+        <button class="carousel-indicators-btn" />
       </li>
     </ul>
   </div>

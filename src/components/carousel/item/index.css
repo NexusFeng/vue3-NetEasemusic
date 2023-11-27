@@ -1,0 +1,23 @@
+.carousel-item {
+  @apply absolute top-0 left-0 w-100% h-100% inline-block overflow-hidden z-1
+}
+
+.carousel-item-mask {
+  @apply absolute w-100% h-100% top-0 left-0 bg-white opacity-25 duration-200
+}
+
+.carousel-item-active {
+  @apply z-10
+}
+
+.carousel-item-hover {
+
+}
+
+.carousel-item-animating {
+
+}
+
+.carousel-item-inStage {
+
+}

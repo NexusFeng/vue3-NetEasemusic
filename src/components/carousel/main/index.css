@@ -2,25 +2,25 @@
   @apply py-2 px-4 bg-blue-500 
 }
 
-.slide {
+.carousel {
   @apply relative overflow-hidden
 }
 
-.slide-container {
+.carousel-container {
   @apply relative h-300px
 }
 .carousel-arrow {
  @apply border-none m-0 pl-10px h-36px w-36px outline-0 cursor-pointer duration-300 rounded-50% absolute bg-gray-300 text-white top-50% z-10 translate-y--50% text-center text-12px
 }
 
-.slide-indicators {
+.carousel-indicators {
   @apply absolute list-none m-0 p-0 z-2 bottom-0 left-50% translate-(x--50% y--50%)
 }
 
-.slide-indicators-item {
+.carousel-indicators-item {
   @apply bg-transparent cursor-pointer inline-block py-12px px-4px opacity-50
 }
 
-.slide-indicators-btn {
+.carousel-indicators-btn {
   @apply block w-30px h-2px bg-white border-none outline-0 p-0 m-0 cursor-pointer duration-300
 }

@@ -1,14 +1,19 @@
 import { ref } from 'vue'
+import type { SetupContext } from 'vue'
 import { throttle } from 'lodash-unified'
-import type { CarouselItemContext } from './type'
+import type { CarouselContext, CarouselEmits, ItemContext } from './type'
 import { useOrderedChildren } from '~/hooks/use-ordered-children'
 
-export const useSlide = (props: any) => {
+export const carouselContextKey: InjectionKey<CarouselContext> = Symbol('carouselContextKey')
+
+export const useCarousel = (props: any, emit: SetupContext<CarouselEmits>['emit']) => {
   const {
     children: items,
-  } = useOrderedChildren<CarouselItemContext>(
+    addChild: addItem,
+    removeChild: removeItem,
+  } = useOrderedChildren<ItemContext>(
     getCurrentInstance()!,
-    'slide',
+    'carousel',
   )
   // refs
   const activeIndex = ref(-1)
@@ -21,7 +26,7 @@ export const useSlide = (props: any) => {
     activeIndex.value = index
   }
 
-  function itemInStage(item: CarouselItemContext, index: number) {
+  function itemInStage(item: ItemContext, index: number) {
     const _items = unref(items)
     const itemCount = _items.length
     if (itemCount === 0 || !item.states.inStage)
@@ -70,8 +75,8 @@ export const useSlide = (props: any) => {
   }
 
   const startTimer = () => {
-    if (props.interval <= 0 || !props.autoplay || timer.value)
-      return
+    // if (props.interval <= 0 || !props.autoplay || timer.value)
+    //   return
     timer.value = setInterval(() => playSlides(), props.interval)
   }
 
@@ -161,6 +166,66 @@ export const useSlide = (props: any) => {
   const throttledIndicatorHover = throttle((index: number) => {
     handleIndicatorHover(index)
   }, 300)
+
+  watch(
+    () => activeIndex.value,
+    (current, prev) => {
+      resetItemPosition(prev)
+      // if (isItemsTwoLength.value) {
+      //   current = current % 2
+      //   prev = prev % 2
+      // }
+      if (prev > -1)
+        emit('change', current, prev)
+    },
+  )
+  // watch(
+  //   () => props.autoplay,
+  //   (autoplay) => {
+  //     autoplay ? startTimer() : pauseTimer()
+  //   }
+  // )
+  watch(
+    () => props.loop,
+    () => {
+      setActiveItem(activeIndex.value)
+    },
+  )
+
+  watch(
+    () => props.interval,
+    () => {
+      resetTimer()
+    },
+  )
+
+  onMounted(() => {
+    watch(
+      () => items.value,
+      () => {
+        if (items.value.length > 0)
+          setActiveItem(props.initialIndex)
+      },
+      {
+        immediate: true,
+      },
+    )
+
+    // resizeObserver.value = useResizeObserver(root.value, () => {
+    //   resetItemPosition()
+    // })
+    startTimer()
+  })
+
+  // provide
+  provide(carouselContextKey, {
+    root,
+    items,
+    loop: props.loop,
+    addItem,
+    removeItem,
+    setActiveItem,
+  })
 
   return {
     root,
