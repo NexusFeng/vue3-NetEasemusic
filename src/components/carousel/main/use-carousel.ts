@@ -1,6 +1,17 @@
-import { ref } from 'vue'
+import {
+  computed,
+  getCurrentInstance,
+  onBeforeUnmount,
+  onMounted,
+  provide,
+  ref,
+  shallowRef,
+  unref,
+  watch,
+} from 'vue'
 import type { SetupContext } from 'vue'
 import { throttle } from 'lodash-unified'
+import { useResizeObserver } from '@vueuse/core'
 import type { CarouselContext, CarouselEmits, ItemContext } from './type'
 import { useOrderedChildren } from '~/hooks/use-ordered-children'
 
@@ -198,7 +209,7 @@ export const useCarousel = (props: any, emit: SetupContext<CarouselEmits>['emit'
       resetTimer()
     },
   )
-
+  const resizeObserver = shallowRef<ReturnType<typeof useResizeObserver>>()
   onMounted(() => {
     watch(
       () => items.value,
@@ -211,10 +222,16 @@ export const useCarousel = (props: any, emit: SetupContext<CarouselEmits>['emit'
       },
     )
 
-    // resizeObserver.value = useResizeObserver(root.value, () => {
-    //   resetItemPosition()
-    // })
+    resizeObserver.value = useResizeObserver(root.value, () => {
+      resetItemPosition()
+    })
     startTimer()
+  })
+
+  onBeforeUnmount(() => {
+    pauseTimer()
+    if (root.value && resizeObserver.value)
+      resizeObserver.value.stop()
   })
 
   // provide

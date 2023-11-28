@@ -30,10 +30,10 @@ const {
 
 const carouselItemClass = computed(() => ({
   'carousel-item': true,
-  'carousel-item-active': active,
-  'carousel-item-hover': hover,
-  'carousel-item-animating': animating,
-  'carousel-item-inStage': inStage,
+  'carousel-item-active': active.value,
+  'carousel-item-hover': hover.value,
+  'carousel-item-animating': animating.value,
+  'carousel-item-inStage': inStage.value,
 }))
 
 const itemStyle = computed<CSSProperties>(() => {

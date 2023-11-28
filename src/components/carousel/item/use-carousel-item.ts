@@ -66,7 +66,6 @@ export const useCarouselItem = (props: CarouselItemProps) => {
 
   function calcCardTranslate(index: number, activeIndex: number) {
     const parentWidth = carouselContext.root.value?.offsetWidth || 0
-
     if (inStage.value)
       return (parentWidth * ((2 - CARD_SCALE) * (index - activeIndex) + 1)) / 4
     else if (index < activeIndex)
