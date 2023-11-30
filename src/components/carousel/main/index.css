@@ -1,14 +1,7 @@
 .carousel {
-  @apply py-2 px-4 bg-blue-500 
+  @apply relative overflow-hidden py-2 bg-blue-100 cursor-pointer
 }
 
-.carousel {
-  @apply relative overflow-hidden
-}
-
-.carousel-container {
-  @apply relative h-300px
-}
 .carousel-arrow {
  @apply border-none m-0 pl-10px h-36px w-36px outline-0 cursor-pointer duration-300 rounded-50% absolute bg-gray-300 text-white top-50% z-10 translate-y--50% text-center text-12px
 }

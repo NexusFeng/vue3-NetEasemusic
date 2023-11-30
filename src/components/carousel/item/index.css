@@ -1,5 +1,5 @@
 .carousel-item {
-  @apply absolute top-0 left-0 w-50% h-100% inline-block overflow-hidden z-1 transition-transform duration-400 ease-in-out
+  @apply absolute top-0 left-0 w-50% h-100% inline-block overflow-hidden z-1 transition-transform duration-400 ease-in-out bg-gray-300
 }
 
 .carousel-item-mask {
@@ -9,16 +9,4 @@
 
 .carousel-item-active {
   @apply z-10
-}
-
-.carousel-item-hover {
-
-}
-
-.carousel-item-animating {
-
-}
-
-.carousel-item-inStage {
-
 }

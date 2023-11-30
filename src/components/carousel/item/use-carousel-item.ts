@@ -7,29 +7,13 @@ import {
   ref,
   unref,
 } from 'vue'
-// import { debugWarn, isUndefined } from '@element-plus/utils'
 import { carouselContextKey } from '../main/use-carousel'
 
 import type { CarouselItemProps } from './type'
 
 export const useCarouselItem = (props: CarouselItemProps) => {
   const carouselContext = inject(carouselContextKey)!
-  // instance
   const instance = getCurrentInstance()!
-  // if (!carouselContext) {
-  //   debugWarn(
-  //     componentName,
-  //     'usage: <el-carousel></el-carousel-item></el-carousel>'
-  //   )
-  // }
-
-  // if (!instance) {
-  //   debugWarn(
-  //     componentName,
-  //     'compositional hook can only be invoked inside setups'
-  //   )
-  // }
-
   const CARD_SCALE = 0.83
 
   const carouselItemRef = ref<HTMLElement>()
@@ -40,11 +24,6 @@ export const useCarouselItem = (props: CarouselItemProps) => {
   const ready = ref(false)
   const inStage = ref(false)
   const animating = ref(false)
-
-  // computed
-  // const { isCardType, isVertical } = carouselContext
-
-  // methods
 
   function processIndex(index: number, activeIndex: number, length: number) {
     const lastItemIndex = length - 1
@@ -74,60 +53,31 @@ export const useCarouselItem = (props: CarouselItemProps) => {
       return ((3 + CARD_SCALE) * parentWidth) / 4
   }
 
-  // function calcTranslate(
-  //   index: number,
-  //   activeIndex: number
-  // ) {
-  //   const rootEl = carouselContext.root.value
-  //   if (!rootEl) return 0
-
-  //   const distance = rootEl.offsetWidth || 0
-  //   return distance * (index - activeIndex)
-  // }
-
   const translateItem = (
     index: number,
     activeIndex: number,
   ) => {
-    // const _isCardType = unref(isCardType)
     const carouselItemLength = carouselContext.items.value.length ?? Number.NaN
 
     const isActive = index === activeIndex
-    // if (!_isCardType && !isUndefined(oldIndex)) {
-    //   animating.value = isActive || index === oldIndex
-    // }
-
-    if (!isActive && carouselItemLength > 2 && carouselContext.loop)
+    if (!isActive && carouselItemLength > 2)
       index = processIndex(index, activeIndex, carouselItemLength)
 
-    // const _isVertical = unref(isVertical)
     active.value = isActive
 
-    // if (_isCardType) {
     inStage.value = Math.round(Math.abs(index - activeIndex)) <= 1
     translate.value = calcCardTranslate(index, activeIndex)
     scale.value = unref(active) ? 1 : CARD_SCALE
-    // } else {
-    //   translate.value = calcTranslate(index, activeIndex, _isVertical)
-    // }
-
     ready.value = true
-
-    // if (isActive && carouselItemRef.value) {
-    //   carouselContext.setContainerHeight(carouselItemRef.value.offsetHeight)
-    // }
   }
 
   function handleItemClick() {
-    // if (carouselContext && unref(isCardType)) {
     const index = carouselContext.items.value.findIndex(
       ({ uid }) => uid === instance.uid,
     )
     carouselContext.setActiveItem(index)
-    // }
   }
 
-  // lifecycle
   onMounted(() => {
     carouselContext.addItem({
       props,
@@ -155,9 +105,7 @@ export const useCarouselItem = (props: CarouselItemProps) => {
     animating,
     hover,
     inStage,
-    // isVertical,
     translate,
-    // isCardType,
     scale,
     ready,
     handleItemClick,

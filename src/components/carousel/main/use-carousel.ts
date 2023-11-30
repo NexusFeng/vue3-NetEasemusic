@@ -24,7 +24,7 @@ export const useCarousel = (props: any, emit: SetupContext<CarouselEmits>['emit'
     removeChild: removeItem,
   } = useOrderedChildren<ItemContext>(
     getCurrentInstance()!,
-    'carousel',
+    'CarouselItem',
   )
   // refs
   const activeIndex = ref(-1)
@@ -74,7 +74,7 @@ export const useCarousel = (props: any, emit: SetupContext<CarouselEmits>['emit'
   const playSlides = () => {
     if (activeIndex.value < items.value.length - 1)
       activeIndex.value = activeIndex.value + 1
-    else if (props.loop)
+    else
       activeIndex.value = 0
   }
 
@@ -86,21 +86,16 @@ export const useCarousel = (props: any, emit: SetupContext<CarouselEmits>['emit'
   }
 
   const startTimer = () => {
-    // if (props.interval <= 0 || !props.autoplay || timer.value)
-    //   return
-    timer.value = setInterval(() => playSlides(), props.interval)
+    timer.value = setInterval(() => playSlides(), 4000)
   }
 
   const resetTimer = () => {
     pauseTimer()
-    if (!props.pauseOnHover)
-      startTimer()
   }
 
   const handleMouseEnter = () => {
     hover.value = true
-    if (props.pauseOnHover)
-      pauseTimer()
+    pauseTimer()
   }
 
   const handleMouseLeave = () => {
@@ -141,9 +136,9 @@ export const useCarousel = (props: any, emit: SetupContext<CarouselEmits>['emit'
     const itemCount = items.value.length
     const oldIndex = activeIndex.value
     if (index < 0)
-      activeIndex.value = props.loop ? itemCount - 1 : 0
+      activeIndex.value = itemCount - 1
     else if (index >= itemCount)
-      activeIndex.value = props.loop ? 0 : itemCount - 1
+      activeIndex.value = 0
     else
       activeIndex.value = index
 
@@ -182,40 +177,18 @@ export const useCarousel = (props: any, emit: SetupContext<CarouselEmits>['emit'
     () => activeIndex.value,
     (current, prev) => {
       resetItemPosition(prev)
-      // if (isItemsTwoLength.value) {
-      //   current = current % 2
-      //   prev = prev % 2
-      // }
       if (prev > -1)
         emit('change', current, prev)
     },
   )
-  // watch(
-  //   () => props.autoplay,
-  //   (autoplay) => {
-  //     autoplay ? startTimer() : pauseTimer()
-  //   }
-  // )
-  watch(
-    () => props.loop,
-    () => {
-      setActiveItem(activeIndex.value)
-    },
-  )
 
-  watch(
-    () => props.interval,
-    () => {
-      resetTimer()
-    },
-  )
   const resizeObserver = shallowRef<ReturnType<typeof useResizeObserver>>()
   onMounted(() => {
     watch(
       () => items.value,
       () => {
         if (items.value.length > 0)
-          setActiveItem(props.initialIndex)
+          setActiveItem(0)
       },
       {
         immediate: true,

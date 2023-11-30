@@ -7,10 +7,6 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  pauseOnHover: {
-    type: Boolean,
-    default: true,
-  },
 })
 
 const emit = defineEmits(carouselEmits)
@@ -51,7 +47,7 @@ defineExpose({
     @mouseenter.stop="handleMouseEnter"
     @mouseleave.stop="handleMouseLeave"
   >
-    <div class="carousel-container" :style="containerStyle">
+    <div class="relative h-300px" :style="containerStyle">
       <transition name="carousel-arrow-left">
         <button
           v-show="hover"

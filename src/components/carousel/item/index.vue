@@ -19,9 +19,6 @@ defineOptions({
 const {
   carouselItemRef,
   active,
-  animating,
-  hover,
-  inStage,
   translate,
   scale,
   ready,
@@ -31,9 +28,6 @@ const {
 const carouselItemClass = computed(() => ({
   'carousel-item': true,
   'carousel-item-active': active.value,
-  'carousel-item-hover': hover.value,
-  'carousel-item-animating': animating.value,
-  'carousel-item-inStage': inStage.value,
 }))
 
 const itemStyle = computed<CSSProperties>(() => {
