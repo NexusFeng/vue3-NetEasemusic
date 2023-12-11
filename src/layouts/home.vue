@@ -9,7 +9,7 @@ import Footer from './Footer.vue'
     <Header />
     <div class="flex justify-start flex-grow">
       <Nav />
-      <main class="text-gray-700 dark:text-gray-200 flex-1 max-w-1000px min-w-700px mx-auto mt-48px">
+      <main class="text-gray-700 dark:text-gray-200 flex-1 max-w-1200px min-w-700px mx-auto mt-48px">
         <RouterView />
       </main>
     </div>

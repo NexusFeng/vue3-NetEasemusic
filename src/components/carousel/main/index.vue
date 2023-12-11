@@ -78,7 +78,7 @@ defineExpose({
       <li
         v-for="index in items.length"
         :key="index"
-        class="carousel-indicators-item" :class="[index === activeIndex ? 'opacity-100' : '',
+        class="carousel-indicators-item" :class="[index === activeIndex ? 'opacity-100' : 'opacity-40',
         ]"
         @mouseenter="throttledIndicatorHover(index)"
         @click.stop="handleIndicatorClick(index)"
