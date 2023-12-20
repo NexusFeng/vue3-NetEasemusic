@@ -62,9 +62,7 @@ export const useCarouselItem = (props: CarouselItemProps) => {
     const isActive = index === activeIndex
     if (!isActive && carouselItemLength > 2)
       index = processIndex(index, activeIndex, carouselItemLength)
-
     active.value = isActive
-
     inStage.value = Math.round(Math.abs(index - activeIndex)) <= 1
     translate.value = calcCardTranslate(index, activeIndex)
     scale.value = unref(active) ? 1 : CARD_SCALE

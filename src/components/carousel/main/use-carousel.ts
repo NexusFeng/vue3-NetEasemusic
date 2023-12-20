@@ -11,7 +11,7 @@ import {
 } from 'vue'
 import type { SetupContext } from 'vue'
 import { throttle } from 'lodash-unified'
-import { useResizeObserver } from '@vueuse/core'
+import type { useResizeObserver } from '@vueuse/core'
 import type { CarouselContext, CarouselEmits, ItemContext } from './type'
 import { useOrderedChildren } from '~/hooks/use-ordered-children'
 
@@ -144,7 +144,6 @@ export const useCarousel = (props: any, emit: SetupContext<CarouselEmits>['emit'
 
     if (oldIndex === activeIndex.value)
       resetItemPosition(oldIndex)
-
     resetTimer()
   }
 
@@ -194,10 +193,6 @@ export const useCarousel = (props: any, emit: SetupContext<CarouselEmits>['emit'
         immediate: true,
       },
     )
-
-    resizeObserver.value = useResizeObserver(root.value, () => {
-      resetItemPosition()
-    })
     startTimer()
   })
 

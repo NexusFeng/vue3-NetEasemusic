@@ -22,12 +22,14 @@ const {
   translate,
   scale,
   ready,
+  inStage,
   handleItemClick,
 } = useCarouselItem(props)
 
 const carouselItemClass = computed(() => ({
   'carousel-item': true,
   'carousel-item-active': active.value,
+  'in-stage': inStage.value && !active.value,
 }))
 
 const itemStyle = computed<CSSProperties>(() => {

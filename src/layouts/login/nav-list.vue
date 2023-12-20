@@ -6,10 +6,10 @@ const fixedList = [
   { key: 'newest-mv', name: '最新MV' },
 ]
 
-const menuItem = ref<Element[]>([])
+const menuItem: Ref = ref([])
 const router = useRouter()
 const go = (name: string, index: number) => {
-  menuItem.value.forEach((ref: Element, idx: number) => {
+  menuItem.value.forEach((ref: HTMLElement, idx: number) => {
     if (index === idx)
       ref.className += ' text-var(--theme-color) bg-var(--menu-item-active-bg)'
     else

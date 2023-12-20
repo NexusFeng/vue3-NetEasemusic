@@ -78,10 +78,10 @@ defineExpose({
       <li
         v-for="index in items.length"
         :key="index"
-        class="carousel-indicators-item" :class="[index === activeIndex ? 'opacity-100' : 'opacity-40',
+        class="carousel-indicators-item" :class="[index - 1 === activeIndex ? 'opacity-100' : 'opacity-40',
         ]"
-        @mouseenter="throttledIndicatorHover(index)"
-        @click.stop="handleIndicatorClick(index)"
+        @mouseenter="throttledIndicatorHover(index - 1)"
+        @click.stop="handleIndicatorClick(index - 1)"
       >
         <button class="carousel-indicators-btn" />
       </li>

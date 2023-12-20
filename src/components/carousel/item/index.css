@@ -10,3 +10,7 @@
 .carousel-item-active {
   @apply z-10
 }
+
+.in-stage {
+  @apply z-3
+}
