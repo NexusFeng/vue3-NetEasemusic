@@ -89,6 +89,6 @@ defineExpose({
   </div>
 </template>
 
-<style>
+<style scoped>
 @import url('./index.css');
 </style>

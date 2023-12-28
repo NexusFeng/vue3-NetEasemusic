@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     copy: typeof import('./components/slideshow/index copy.vue')['default']
     Counter: typeof import('./components/Counter.vue')['default']
+    Dialog: typeof import('./components/dialog/index.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
     GlobalSearch: typeof import('./components/global-search/GlobalSearch.vue')['default']
     Header: typeof import('./components/Header.vue')['default']

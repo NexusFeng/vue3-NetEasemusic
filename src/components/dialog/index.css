@@ -1,0 +1,12 @@
+.modal_mask_common {
+  @apply top-0 left-0 w-100% h-100% z-5000
+}
+.modal {
+  @apply fixed flex justify-center items-center border-0 outline-0
+}
+.modal-content {
+  @apply z-5001 p-20px bg-white rounded-lg overflow-hidden shadow relative
+}
+.close-btn {
+  @apply w-20px h-20px flex justify-center align-center absolute top-16px right-16px cursor-pointer
+}

@@ -15,9 +15,9 @@ getBanner().then((res) => {
 
 <template>
   <div class="py-18px px-32px">
-    <Carousel height="257px">
+    <Carousel height="200px">
       <CarouselItem v-for="item in banners" :key="item.encodeId">
-        <img style="width: 610px;height: 257px;" :src="item.imageUrl">
+        <img :src="item.imageUrl">
       </CarouselItem>
     </Carousel>
   </div>
