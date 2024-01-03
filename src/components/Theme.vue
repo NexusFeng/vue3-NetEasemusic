@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import useAppStore from '~/modules/pinia/modules/app'
+import { useAppStore } from '~/store'
 import BlackVariables from '~/styles/theme/black'
 import RedVariables from '~/styles/theme/red'
 import whiteVariables from '~/styles/theme/white'

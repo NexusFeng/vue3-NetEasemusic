@@ -34,6 +34,7 @@ specifiers:
   npm-run-all: ^4.1.5
   nprogress: ^0.2.0
   pinia: ^2.0.32
+  pinia-plugin-persistedstate: ^3.2.1
   pnpm: ^7.28.0
   shiki: ^0.14.1
   taze: ^0.9.0
@@ -62,6 +63,7 @@ dependencies:
   lodash-unified: 1.0.3_quczmr5am3vrkkb7f3r4p7csdq
   nprogress: 0.2.0
   pinia: 2.0.32_typescript@4.9.5+vue@3.3.8
+  pinia-plugin-persistedstate: 3.2.1_pinia@2.0.32
   vue: 3.3.8_typescript@4.9.5
   vue-demi: 0.13.11_vue@3.3.8
   vue-i18n: 9.2.2_vue@3.3.8
@@ -7275,6 +7277,14 @@ packages:
     resolution: {integrity: sha512-C3FsVNH1udSEX48gGX1xfvwTWfsYWj5U+8/uK15BGzIGrKoUpghX8hWZwa/OFnakBiiVNmBvemTJR5mcy7iPcg==}
     engines: {node: '>=4'}
     dev: true
+
+  /pinia-plugin-persistedstate/3.2.1_pinia@2.0.32:
+    resolution: {integrity: sha512-MK++8LRUsGF7r45PjBFES82ISnPzyO6IZx3CH5vyPseFLZCk1g2kgx6l/nW8pEBKxxd4do0P6bJw+mUSZIEZUQ==}
+    peerDependencies:
+      pinia: ^2.0.0
+    dependencies:
+      pinia: 2.0.32_typescript@4.9.5+vue@3.3.8
+    dev: false
 
   /pinia/2.0.32_typescript@4.9.5+vue@3.3.8:
     resolution: {integrity: sha512-8Tw4OrpCSJ028UUyp0gYPP/wyjigLoEceuO/x1G+FlHVf73337e5vLm4uDmrRIoBG1hvaed/eSHnrCFjOc4nkA==}

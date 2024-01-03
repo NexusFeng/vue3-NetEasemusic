@@ -5,7 +5,7 @@ interface AppState {
   theme: string
 }
 
-const useAppStore = defineStore('app', {
+export const useAppStore = defineStore('app', {
   state: (): AppState => ({
     // 皮肤
     theme: 'red',
@@ -17,5 +17,3 @@ const useAppStore = defineStore('app', {
     },
   },
 })
-
-export default useAppStore

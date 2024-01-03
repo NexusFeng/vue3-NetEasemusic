@@ -3,6 +3,7 @@ import { type CSSProperties, computed, nextTick, ref, watch } from 'vue'
 
 const props = withDefaults(defineProps<{
   visible: boolean
+  title?: string
   width?: number
   closeButton?: boolean
   closeOnClickMask?: boolean
@@ -59,11 +60,14 @@ const onClickMask = () => {
         <div class="modal_mask_common absolute bg-black/[.25] " @click="onClickMask()" />
         <Transition
           name="modal-zoom"
-          @afterLeave="contentVisible = false"
+          @after-leave="contentVisible = false"
           @before-enter="contentVisible = true"
         >
           <div v-show="visible" class="modal-content" :style="contentStyle">
-            <span v-if="closeButton" class="close-btn" @click="close()"><IconClose /></span>
+            <div class="h-20px">
+              <span class="absolute top-10px">{{ title || '' }}</span>
+              <span v-if="closeButton" class="close-btn" @click="close()"><IconClose /></span>
+            </div>
             <slot v-if="contentVisible" />
           </div>
         </Transition>
