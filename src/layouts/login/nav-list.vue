@@ -47,26 +47,28 @@ onMounted(() => {
       <IconMusicMenu v-if="item.key === 'recommend'" class="w-6" />
       <IconMusic v-if="item.key === 'newest-music'" class="w-6" />
       <IconMusicCd v-if="item.key === 'newest-mv'" class="w-6" />
-      <div>{{ item.name }}</div>
+      <div class="text-13px">
+        {{ item.name }}
+      </div>
     </div>
     <div v-if="createList.length">
-      <div class="px-4">
+      <div class="px-4 text-xs">
         创建的歌单
       </div>
       <div v-for="item in createList" :key="item.id" class="hover">
         <IconMusicMenu class="w-6" />
-        <div class="w-full truncate">
+        <div class="w-full truncate text-13px">
           {{ item.name }}
         </div>
       </div>
     </div>
     <div v-if="collectList.length">
-      <div class="px-4">
+      <div class="px-4 text-xs">
         收藏的歌单
       </div>
       <div v-for="item in collectList" :key="item.id" class="hover">
         <IconMusicMenu class="w-6" />
-        <div class="w-full truncate">
+        <div class="w-full truncate text-13px">
           {{ item.name }}
         </div>
       </div>

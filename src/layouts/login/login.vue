@@ -50,8 +50,8 @@ onMounted(() => {
       <div>未登录</div>
     </div>
     <div v-else class="flex">
-      <img :src="userStore.userInfo.avatarUrl" class="w-51px h-51px rounded-full">
-      <div class="ml-2.5 flex flex-col justify-center w-full truncate">
+      <img :src="userStore.userInfo.avatarUrl" class="w-45px h-45px rounded-full">
+      <div class="ml-2.5 flex flex-col justify-center w-full truncate text-13px">
         <div>{{ userStore.userInfo.nickname }}</div>
         <div class="truncate">
           {{ userStore.userInfo.signature }}
