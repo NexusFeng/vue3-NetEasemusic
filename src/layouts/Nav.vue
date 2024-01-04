@@ -4,7 +4,7 @@ import NavList from './login/nav-list.vue'
 </script>
 
 <template>
-  <div class="w-240px bg-var(--menu-bgcolor) overflow-y-auto pt-48px">
+  <div class="w-240px bg-var(--menu-bgcolor) ">
     <Login />
     <NavList />
   </div>
