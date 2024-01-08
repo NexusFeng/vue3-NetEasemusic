@@ -30,5 +30,10 @@ export const useUserStore = defineStore('user', {
     setUserPlaylist(playList: []) {
       this.playlist = playList
     },
+    cleanUserInfo() {
+      this.userInfo = {}
+      this.userId = ''
+      this.playlist = []
+    },
   },
 })

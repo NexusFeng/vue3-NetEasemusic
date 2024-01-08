@@ -21,17 +21,17 @@ const go = (name: string, index: number) => {
 }
 
 const userStore = useUserStore()
-const { userId } = storeToRefs(userStore)
-const createList: Ref<any[]> = ref([])
-const collectList: Ref<any[]> = ref([])
-const init = () => {
+const { userId, playlist } = storeToRefs(userStore)
+const createList: Ref = ref([])
+const collectList: Ref = ref([])
+
+watch(playlist, () => {
   createList.value = userStore.playlist.filter(item => String(item.creator.userId) === userId.value)
   collectList.value = userStore.playlist.filter(item => String(item.creator.userId) !== userId.value)
-}
+}, { immediate: true })
 
 onMounted(() => {
   menuItem.value[0].className += ' text-var(--theme-color) bg-var(--menu-item-active-bg)'
-  userId && init()
 })
 </script>
 
@@ -52,7 +52,7 @@ onMounted(() => {
       </div>
     </div>
     <div v-if="createList.length">
-      <div class="px-4 text-xs">
+      <div class="p-4 text-xs">
         创建的歌单
       </div>
       <div v-for="item in createList" :key="item.id" class="hover">
@@ -63,7 +63,7 @@ onMounted(() => {
       </div>
     </div>
     <div v-if="collectList.length">
-      <div class="px-4 text-xs">
+      <div class="p-4 text-xs">
         收藏的歌单
       </div>
       <div v-for="item in collectList" :key="item.id" class="hover">
