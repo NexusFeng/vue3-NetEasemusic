@@ -41,7 +41,7 @@ onMounted(() => {
 <template>
   <Dialog v-model:visible="isShowDialog" :title="tipTitle">
     <div v-if="isLogin">
-      <input v-model="uid" type="text" class="w-100% mt-20px bg-slate-200 pl-10px focus:outline-none py-5px" placeholder="请输入您的网易云uid">
+      <input v-model="uid" type="text" class="w-100% mt-5 bg-slate-200 pl-2.5 focus:outline-none py-5px" placeholder="请输入您的网易云uid">
       <div class="mt-2">
         1、请
         <a href="http://music.163.com" target="_blank" class="text-var(--theme-color)">点我(http://music.163.com)</a>

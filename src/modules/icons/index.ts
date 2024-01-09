@@ -6,6 +6,7 @@ import {
   Music,
   MusicCd,
   MusicMenu,
+  PlayOne,
   Right,
   Search,
   Theme,
@@ -29,6 +30,7 @@ export const icons: Icons = {
   IconMusic: Music,
   IconVideo: Video,
   IconClose: Close,
+  IconPlayOne: PlayOne,
 }
 export const install = (app: App) => {
   for (const key of Object.keys(icons))

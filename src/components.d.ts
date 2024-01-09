@@ -9,6 +9,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Card: typeof import('./components/card/index.vue')['default']
     copy: typeof import('./components/slideshow/index copy.vue')['default']
     Counter: typeof import('./components/Counter.vue')['default']
     Dialog: typeof import('./components/dialog/index.vue')['default']

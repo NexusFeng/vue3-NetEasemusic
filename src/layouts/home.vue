@@ -9,9 +9,11 @@ import Footer from './Footer.vue'
     <Header />
     <div class="flex justify-start h-[calc(100vh-106px)]">
       <Nav />
-      <main class="text-gray-700 dark:text-gray-200 flex-1 max-w-1200px min-w-700px mx-auto">
-        <RouterView />
-      </main>
+      <div class="w-full h-full overflow-y-scroll">
+        <main class="text-gray-700 dark:text-gray-200 flex-1 max-w-6xl min-w-2xl mx-auto">
+          <RouterView />
+        </main>
+      </div>
     </div>
     <Footer />
   </div>

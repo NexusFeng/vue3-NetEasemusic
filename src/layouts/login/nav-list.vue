@@ -36,7 +36,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="h-[calc(100%-38px)] overflow-y-scroll">
+  <div class="h-[calc(100%-85px)] overflow-y-scroll">
     <div
       v-for="(item, index) in fixedList" :key="item.key"
       ref="menuItem"
