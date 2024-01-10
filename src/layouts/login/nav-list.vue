@@ -55,7 +55,7 @@ onMounted(() => {
       <div class="p-4 text-xs">
         创建的歌单
       </div>
-      <div v-for="item in createList" :key="item.id" class="hover">
+      <div v-for="item in createList" :key="item.id" class="flex items-center cursor-pointer p-4 hover:bg-var(--menu-item-hover-bg)">
         <IconMusicMenu class="w-6" />
         <div class="w-full truncate text-13px">
           {{ item.name }}
