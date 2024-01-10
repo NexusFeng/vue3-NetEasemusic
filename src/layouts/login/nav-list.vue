@@ -40,7 +40,7 @@ onMounted(() => {
     <div
       v-for="(item, index) in fixedList" :key="item.key"
       ref="menuItem"
-      class="hover"
+      class="flex items-center cursor-pointer p-4 hover:bg-var(--menu-item-hover-bg)"
       @click="go(item.key, index)"
     >
       <IconMusicCd v-if="item.key === 'discovery'" class="w-6" />
@@ -75,9 +75,3 @@ onMounted(() => {
     </div>
   </div>
 </template>
-
-<style>
-.hover {
-  @apply flex items-center cursor-pointer p-4 hover:bg-var(--menu-item-hover-bg)
-}
-</style>

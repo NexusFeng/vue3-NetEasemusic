@@ -18,4 +18,6 @@ export default {
   '--menu-bgcolor': '#EDEDED',
   '--menu-item-hover-bg': '#e7e7e7',
   '--menu-item-active-bg': '#e2e2e2',
+
+  '--light-bgcolor': '#f5f5f5',
 }

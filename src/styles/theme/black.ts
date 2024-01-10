@@ -20,4 +20,7 @@ export default {
   '--menu-bgcolor': '#202020',
   '--menu-item-hover-bg': '#1d1d1d',
   '--menu-item-active-bg': '#1b1b1b',
+
+  '--light-bgcolor': '#2e2e2e',
+
 }
