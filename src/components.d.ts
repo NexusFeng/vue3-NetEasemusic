@@ -20,11 +20,13 @@ declare module '@vue/runtime-core' {
     Index2: typeof import('./components/slide/index2.vue')['default']
     Item: typeof import('./components/carousel/item/index.vue')['default']
     Main: typeof import('./components/carousel/main/index.vue')['default']
+    MvCard: typeof import('./components/card/mv-card.vue')['default']
     Nav: typeof import('./components/Nav.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Slide: typeof import('./components/slide/index.vue')['default']
     Slideshow: typeof import('./components/slideshow/index.vue')['default']
+    SongCard: typeof import('./components/card/song-card.vue')['default']
     Theme: typeof import('./components/Theme.vue')['default']
   }
 }

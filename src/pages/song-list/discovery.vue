@@ -1,8 +1,9 @@
 <script lang="ts" setup>
-import { getBanner, getNewSongs, getPersonalized } from '~/api/discover'
+import { getBanner, getNewSongs, getPersonalized, getPersonalizedMv } from '~/api/discover'
 import Carousel from '~/components/carousel/main/index.vue'
 import CarouselItem from '~/components/carousel/item/index.vue'
-import Card from '~/components/card/index.vue'
+import SongCard from '~/components/card/song-card.vue'
+import MVCard from '~/components/card/mv-card.vue'
 
 interface Banner {
   imageUrl: string
@@ -12,27 +13,37 @@ interface SongList {
   id: number
   name: string
   picUrl: string
+  artistName: string
   copywirter: string
 }
 interface LatestSongList extends SongList {
   artistsName: string
 }
+interface MVList extends SongList {
+  playCount: number
+}
+// 获取banner
 const banners: Ref<Banner[]> = ref([])
 getBanner().then((res) => {
   banners.value = (res as any).banners
 })
-
+// 获取推荐歌单列表
 const songList: Ref<SongList[]> = ref([])
 getPersonalized({ limit: 10 }).then((res) => {
   songList.value = (res as any).result
 })
-
+// 获取最新音乐列表
 const latestSong: Ref<LatestSongList[]> = ref([])
 getNewSongs().then((res) => {
   latestSong.value = (res as any).result.map((item: any) => {
     item.artistsName = (item.song.artists || []).map(({ name }: { name: string }) => name).join('/')
     return item
   })
+})
+// 获取推荐MV
+const MVLists: Ref<MVList[]> = ref([])
+getPersonalizedMv().then((res) => {
+  MVLists.value = (res as any).result
 })
 </script>
 
@@ -44,11 +55,11 @@ getNewSongs().then((res) => {
       </CarouselItem>
     </Carousel>
   </div>
-  <div class="mb-3 text-lg text-black">
+  <div class="mb-3 text-lg">
     推荐歌单
   </div>
   <div class="flex -mx-1 flex-wrap">
-    <Card v-for="item in songList" :key="item.id" v-bind="item" />
+    <SongCard v-for="item in songList" :key="item.id" v-bind="item" />
   </div>
   <div class="my-3 text-lg text-black">
     最新音乐
@@ -75,5 +86,11 @@ getNewSongs().then((res) => {
         </div>
       </div>
     </div>
+  </div>
+  <div class="my-3 text-lg text-black">
+    推荐MV
+  </div>
+  <div class="flex flex-wrap -mx-3">
+    <MVCard v-for="item in MVLists" :key="item.id" v-bind="item" />
   </div>
 </template>

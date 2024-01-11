@@ -22,5 +22,5 @@ export default {
   '--menu-item-active-bg': '#1b1b1b',
 
   '--light-bgcolor': '#2e2e2e',
-
+  '--font-color-grey-shallow': '#727272',
 }
