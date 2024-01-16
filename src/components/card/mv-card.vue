@@ -15,9 +15,6 @@ defineProps(['id', 'name', 'playCount', 'picUrl', 'artistName'])
           <IconPlayOne theme="filled" size="32" fill="#d33a31" />
         </div>
       </div>
-      <!-- <div class="duration-wrap" v-if="duration">
-        {{ $utils.formatTime(duration / 1000) }}
-      </div> -->
     </div>
     <p v-if="name" class="mt-2 w-full truncate text-xs">
       {{ name }}

@@ -21,4 +21,7 @@ export default {
 
   '--light-bgcolor': '#f5f5f5',
   '--font-color-grey-shallow': '#BEBEBE',
+
+  '--tab-item-color': '#7F7F81',
+  '--tab-item-active-color': '#000',
 }
