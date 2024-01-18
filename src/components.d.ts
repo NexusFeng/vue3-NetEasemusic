@@ -22,6 +22,7 @@ declare module '@vue/runtime-core' {
     Main: typeof import('./components/carousel/main/index.vue')['default']
     MvCard: typeof import('./components/card/mv-card.vue')['default']
     Nav: typeof import('./components/Nav.vue')['default']
+    Pagination: typeof import('./components/pagination/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Slide: typeof import('./components/slide/index.vue')['default']

@@ -25,4 +25,6 @@ export default {
   '--font-color-grey-shallow': '#727272',
   '--tab-item-color': '#797979',
   '--tab-item-active-color': '#fff',
+
+  '--pagination-color': '#B1B1B1',
 }

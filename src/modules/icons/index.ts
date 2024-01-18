@@ -1,6 +1,8 @@
 import type { App } from 'vue'
 import {
   Close,
+  DoubleLeft,
+  DoubleRight,
   Github,
   Left,
   Music,
@@ -31,6 +33,8 @@ export const icons: Icons = {
   IconVideo: Video,
   IconClose: Close,
   IconPlayOne: PlayOne,
+  IconDoubleLeft: DoubleLeft,
+  IconDoubleRight: DoubleRight,
 }
 export const install = (app: App) => {
   for (const key of Object.keys(icons))

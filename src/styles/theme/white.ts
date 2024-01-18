@@ -24,4 +24,6 @@ export default {
 
   '--tab-item-color': '#7F7F81',
   '--tab-item-active-color': '#000',
+
+  '--pagination-color': '#4A4A4A',
 }
