@@ -5,6 +5,7 @@ import {
   DoubleRight,
   Github,
   Left,
+  More,
   Music,
   MusicCd,
   MusicMenu,
@@ -35,6 +36,7 @@ export const icons: Icons = {
   IconPlayOne: PlayOne,
   IconDoubleLeft: DoubleLeft,
   IconDoubleRight: DoubleRight,
+  IconMore: More,
 }
 export const install = (app: App) => {
   for (const key of Object.keys(icons))

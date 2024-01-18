@@ -6,5 +6,5 @@ import Pagination from '~/components/pagination/index.vue'
   <div class="p4">
     最新音乐
   </div>
-  <Pagination />
+  <Pagination :total="30" />
 </template>

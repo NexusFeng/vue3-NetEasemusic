@@ -1,13 +1,14 @@
 <script lang="ts" setup>
-const props = withDefaults(defineProps<{ tabs: Array; align: string; active: number }>(), {
+const props = withDefaults(defineProps<{ tabs: []; align: string; active: number }>(), {
   tabs: () => [],
   align: 'justify-end',
   active: 0,
 })
 const tabArr = computed(() => {
-  return typeof props.tabs[0] === 'string'
-    ? props.tabs.map(tab => ({ title: tab }))
-    : props.tabs
+  // return typeof props.tabs[0] === 'string'
+  //   ? props.tabs.map((tab: any) => ({ title: tab }))
+  //   : props.tabs
+  return props.tabs
 })
 // const onChangeTab = (tab, emit) => {
 // }
