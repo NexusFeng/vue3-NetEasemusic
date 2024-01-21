@@ -70,17 +70,17 @@ watchEffect(() => {
 
 <template>
   <ul v-if="total > 0" class="flex text-[14px] items-center h-[32px] font-bold text-var(--pagination-color)">
-    <li class="defaultStyle">
+    <li class="defaultStyle" :class="!showPrevMore ? '!cursor-not-allowed' : ''">
       <IconLeft />
     </li>
-    <li class="defaultStyle">
+    <li class="defaultStyle" :aria-current="currentPage === 1">
       1
     </li>
     <li v-if="showPrevMore" class="defaultStyle" @mouseenter="quickPrevHover = true" @mouseleave="quickPrevHover = false">
       <IconDoubleLeft v-if="quickPrevHover" class="defaultStyle" />
       <IconMore v-else />
     </li>
-    <li v-for="page in pages" :key="page" class="defaultStyle">
+    <li v-for="page in pages" :key="page" class="defaultStyle" :aria-current="currentPage === page">
       {{ page }}
     </li>
     <li v-if="showNextMore" class="defaultStyle" @mouseenter="quickNextHover = true" @mouseleave="quickNextHover = false">
@@ -90,7 +90,7 @@ watchEffect(() => {
     <li class="defaultStyle">
       {{ total }}
     </li>
-    <li class="defaultStyle">
+    <li class="defaultStyle" :class="!showNextMore ? '!cursor-not-allowed' : ''">
       <IconRight />
     </li>
   </ul>
@@ -98,6 +98,6 @@ watchEffect(() => {
 
 <style scoped>
 .defaultStyle {
-  @apply w-[32px] cursor-pointer hover:text-var(--theme-color)
+  @apply w-[32px] cursor-pointer hover:text-var(--theme-color) aria-[current='true']:text-var(--theme-color)
 }
 </style>
