@@ -4,32 +4,29 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
-  currentPage: {
-    type: Number,
-    default: 1,
-  },
   pagerCount: {
     type: Number,
     default: 7,
   },
 })
+const emit = defineEmits(['change'])
 const showPrevMore = ref(false)
 const showNextMore = ref(false)
 const quickPrevHover = ref(false)
 const quickNextHover = ref(false)
+const currentPage = ref(1)
 
 const pages = computed(() => {
   const pagerCount = props.pagerCount
   const halfPagerCount = (pagerCount - 1) / 2
-  const currentPage = Number(props.currentPage)
   const pageCount = Number(props.total)
   let showPrevMore = false
   let showNextMore = false
   if (pageCount > pagerCount) {
-    if (currentPage > pagerCount - halfPagerCount)
+    if (currentPage.value > pagerCount - halfPagerCount)
       showPrevMore = true
 
-    if (currentPage < pageCount - halfPagerCount)
+    if (currentPage.value < pageCount - halfPagerCount)
       showNextMore = true
   }
   const array: number[] = []
@@ -44,7 +41,7 @@ const pages = computed(() => {
   }
   else if (showPrevMore && showNextMore) {
     const offset = Math.floor(pagerCount / 2) - 1
-    for (let i = currentPage - offset; i <= currentPage + offset; i++)
+    for (let i = currentPage.value - offset; i <= currentPage.value + offset; i++)
       array.push(i)
   }
   else {
@@ -59,18 +56,44 @@ watchEffect(() => {
   showPrevMore.value = false
   showNextMore.value = false
   if (props.total! > props.pagerCount) {
-    if (props.currentPage > props.pagerCount - halfPagerCount)
+    if (currentPage.value > props.pagerCount - halfPagerCount)
       showPrevMore.value = true
-
-    if (props.currentPage < props.total! - halfPagerCount)
+    if (currentPage.value < props.total! - halfPagerCount)
       showNextMore.value = true
   }
 })
+
+const onPagerClick = (e: MouseEvent) => {
+  const target = e.target as Element
+  if (target.tagName.toLowerCase() === 'ul')
+    return
+  if (target.tagName.toLowerCase() !== 'li') {
+    const li = target.closest('li') as HTMLLIElement
+    if (Array.from(li.classList).includes('left')) {
+      if (currentPage.value <= 1)
+        return
+      currentPage.value--
+    }
+    if (Array.from(li.classList).includes('right')) {
+      if (currentPage.value === props.total)
+        return
+      currentPage.value++
+    }
+    emit('change', currentPage.value)
+  }
+  else {
+    const newPage = Number(target.textContent)
+    if (newPage !== currentPage.value) {
+      currentPage.value = newPage
+      emit('change', newPage)
+    }
+  }
+}
 </script>
 
 <template>
-  <ul v-if="total > 0" class="flex text-[14px] items-center h-[32px] font-bold text-var(--pagination-color)">
-    <li class="defaultStyle" :class="!showPrevMore ? '!cursor-not-allowed' : ''">
+  <ul v-if="total > 0" class="flex text-[14px] items-center h-[32px] font-bold text-var(--pagination-color)" @click="onPagerClick">
+    <li class="defaultStyle left" :class="!showPrevMore ? '!cursor-not-allowed ' : ''">
       <IconLeft />
     </li>
     <li class="defaultStyle" :aria-current="currentPage === 1">
@@ -87,10 +110,10 @@ watchEffect(() => {
       <IconDoubleRight v-if="quickNextHover" class="defaultStyle" />
       <IconMore v-else />
     </li>
-    <li class="defaultStyle">
+    <li class="defaultStyle" :aria-current="currentPage === total">
       {{ total }}
     </li>
-    <li class="defaultStyle" :class="!showNextMore ? '!cursor-not-allowed' : ''">
+    <li class="defaultStyle right" :class="!showNextMore ? '!cursor-not-allowed' : ''">
       <IconRight />
     </li>
   </ul>
@@ -98,6 +121,6 @@ watchEffect(() => {
 
 <style scoped>
 .defaultStyle {
-  @apply w-[32px] cursor-pointer hover:text-var(--theme-color) aria-[current='true']:text-var(--theme-color)
+  @apply w-7 mx-1 cursor-pointer hover:text-var(--theme-color) aria-[current='true']:text-var(--theme-color)
 }
 </style>
