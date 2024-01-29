@@ -15,6 +15,7 @@ const showNextMore = ref(false)
 const quickPrevHover = ref(false)
 const quickNextHover = ref(false)
 const currentPage = ref(1)
+const key = ref(1)
 
 const pages = computed(() => {
   const pagerCount = props.pagerCount
@@ -73,11 +74,21 @@ const onPagerClick = (e: MouseEvent) => {
       if (currentPage.value <= 1)
         return
       currentPage.value--
+      key.value++
     }
     if (Array.from(li.classList).includes('right')) {
       if (currentPage.value === props.total)
         return
       currentPage.value++
+      key.value++
+    }
+    if (Array.from(li.classList).includes('prev')) {
+      const newPage = currentPage.value - (props.pagerCount - 2)
+      currentPage.value = newPage > 0 ? newPage : 1
+    }
+    if (Array.from(li.classList).includes('next')) {
+      const newPage = currentPage.value + (props.pagerCount - 2)
+      currentPage.value = newPage > props.total ? props.total : newPage
     }
     emit('change', currentPage.value)
   }
@@ -85,6 +96,7 @@ const onPagerClick = (e: MouseEvent) => {
     const newPage = Number(target.textContent)
     if (newPage !== currentPage.value) {
       currentPage.value = newPage
+      key.value++
       emit('change', newPage)
     }
   }
@@ -92,21 +104,21 @@ const onPagerClick = (e: MouseEvent) => {
 </script>
 
 <template>
-  <ul v-if="total > 0" class="flex text-[14px] items-center h-[32px] font-bold text-var(--pagination-color)" @click="onPagerClick">
+  <ul v-if="total > 0" :key="key" class="flex text-[14px] items-center h-[32px] font-bold text-var(--pagination-color)" @click="onPagerClick">
     <li class="defaultStyle left" :class="!showPrevMore ? '!cursor-not-allowed ' : ''">
       <IconLeft />
     </li>
     <li class="defaultStyle" :aria-current="currentPage === 1">
       1
     </li>
-    <li v-if="showPrevMore" class="defaultStyle" @mouseenter="quickPrevHover = true" @mouseleave="quickPrevHover = false">
+    <li v-if="showPrevMore" class="defaultStyle prev" @mouseenter="quickPrevHover = true" @mouseleave="quickPrevHover = false">
       <IconDoubleLeft v-if="quickPrevHover" class="defaultStyle" />
       <IconMore v-else />
     </li>
     <li v-for="page in pages" :key="page" class="defaultStyle" :aria-current="currentPage === page">
       {{ page }}
     </li>
-    <li v-if="showNextMore" class="defaultStyle" @mouseenter="quickNextHover = true" @mouseleave="quickNextHover = false">
+    <li v-if="showNextMore" class="defaultStyle next" @mouseenter="quickNextHover = true" @mouseleave="quickNextHover = false">
       <IconDoubleRight v-if="quickNextHover" class="defaultStyle" />
       <IconMore v-else />
     </li>
