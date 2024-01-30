@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import Tab from '~/components/tabs/index.vue'
 import SongCard from '~/components/card/song-card.vue'
+import Pagination from '~/components/pagination/index.vue'
 import { getPlaylists, getTopPlaylists } from '~/api/recommend'
 const tabs = ['全部', '欧美', '华语', '流行', '说唱', '摇滚', '民谣', '电子', '轻音乐', '影视原声', 'ACG', '怀旧', '治愈', '旅行']
 
@@ -33,6 +34,7 @@ getTopPlaylists({
 })
 const songList: Ref<SongList[]> = ref([])
 const currentPage: Ref<number> = ref(1)
+const listTotal: Ref<number> = ref(0)
 getPlaylists({
   limit: 50,
   offset: (currentPage.value - 1) * 50,
@@ -43,6 +45,7 @@ getPlaylists({
     item.desc = `播放量：${Math.round(item.playCount / 10000)}万`
     return item
   })
+  listTotal.value = Math.ceil((res as any).total / 50)
 })
 
 const onClickCard = () => {
@@ -74,6 +77,9 @@ const onClickCard = () => {
     <Tab :tabs="tabs" align="justify-end" :active="activeTabIndex" />
     <div class="flex -mx-1 flex-wrap">
       <SongCard v-for="item in songList" :key="item.id" v-bind="item" />
+    </div>
+    <div class="flex justify-end mb-4">
+      <Pagination :total="listTotal" />
     </div>
   </div>
 </template>
