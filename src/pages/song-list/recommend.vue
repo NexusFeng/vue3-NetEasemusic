@@ -35,21 +35,29 @@ getTopPlaylists({
 const songList: Ref<SongList[]> = ref([])
 const currentPage: Ref<number> = ref(1)
 const listTotal: Ref<number> = ref(0)
-getPlaylists({
-  limit: 50,
-  offset: (currentPage.value - 1) * 50,
-  cat: tabs[activeTabIndex.value],
-}).then((res) => {
-  songList.value = (res as any).playlists.map((item: any) => {
-    item.picUrl = item.coverImgUrl
-    item.desc = `播放量：${Math.round(item.playCount / 10000)}万`
-    return item
+const getList = () => {
+  getPlaylists({
+    limit: 50,
+    offset: (currentPage.value - 1) * 50,
+    cat: tabs[activeTabIndex.value],
+  }).then((res) => {
+    songList.value = (res as any).playlists.map((item: any) => {
+      item.picUrl = item.coverImgUrl
+      item.desc = `播放量：${Math.round(item.playCount / 10000)}万`
+      return item
+    })
+    listTotal.value = Math.ceil((res as any).total / 50)
   })
-  listTotal.value = Math.ceil((res as any).total / 50)
-})
+}
 
 const onClickCard = () => {
 }
+const pageChange = (page: number) => {
+  currentPage.value = page
+  getList()
+}
+// 初始化
+getList()
 </script>
 
 <template>
@@ -79,7 +87,7 @@ const onClickCard = () => {
       <SongCard v-for="item in songList" :key="item.id" v-bind="item" />
     </div>
     <div class="flex justify-end mb-4">
-      <Pagination :total="listTotal" />
+      <Pagination :total="listTotal" @change="pageChange" />
     </div>
   </div>
 </template>

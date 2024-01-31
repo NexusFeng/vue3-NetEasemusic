@@ -5,7 +5,7 @@ defineProps(['id', 'name', 'desc', 'picUrl', 'artistsName'])
 <template>
   <div class="w-[calc(20%-9px)] cursor-pointer m-1 mb-8 group text-black">
     <div class="relative w-full mb-1 overflow-hidden">
-      <img class="w-full rounded" :src="picUrl">
+      <img v-lazy class="w-full rounded min-h-40" :data-src="picUrl">
       <div v-if="desc" class="absolute p-1.5 left-0 right-0 top-0 bg-black/25 -translate-y-full transition-all delay-200 opacity-0 group-hover:opacity-100 group-hover:translate-y-0">
         <span class="text-white text-xs">{{ desc }}</span>
       </div>
