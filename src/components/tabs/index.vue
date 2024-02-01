@@ -4,14 +4,13 @@ const props = withDefaults(defineProps<{ tabs: string[]; align: string; active: 
   align: 'justify-end',
   active: 0,
 })
+const emit = defineEmits(['changeTab'])
 const tabArr = computed(() => {
-  // return typeof props.tabs[0] === 'string'
-  //   ? props.tabs.map((tab: any) => ({ title: tab }))
-  //   : props.tabs
   return props.tabs
 })
-// const onChangeTab = (tab, emit) => {
-// }
+const onChangeTab = (index: number) => {
+  emit('changeTab', index)
+}
 </script>
 
 <template>
@@ -24,6 +23,7 @@ const tabArr = computed(() => {
       :key="index"
       class="py-3 mx-3 cursor-pointer text-xs text-var(--tab-item-color)"
       :class="[{ '!text-var(--theme-color)': active === index }, { 'hover:text-var(--tab-item-active-color)': active !== index }]"
+      @click="onChangeTab(index)"
     >
       <span class="title">{{ tab }}</span>
     </li>

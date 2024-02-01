@@ -58,6 +58,12 @@ const pageChange = (page: number) => {
 }
 // 初始化
 getList()
+
+const changeTab = (index: number) => {
+  activeTabIndex.value = index
+  currentPage.value = 1
+  getList()
+}
 </script>
 
 <template>
@@ -82,12 +88,12 @@ getList()
       <div :style="{ backgroundImage: `url(${topPlayBanner.coverImgUrl})` }" class="w-full h-full bg-cover z-0 blur-lg absolute left-0 right-0 top-0 bottom-0" />
       <div class="absolute left-0 right-0 top-0 bottom-0 text-white/50 z-0" />
     </div>
-    <Tab :tabs="tabs" align="justify-end" :active="activeTabIndex" />
+    <Tab :tabs="tabs" align="justify-end" :active="activeTabIndex" @changeTab="changeTab" />
     <div class="flex -mx-1 flex-wrap">
       <SongCard v-for="item in songList" :key="item.id" v-bind="item" />
     </div>
     <div class="flex justify-end mb-4">
-      <Pagination :total="listTotal" @change="pageChange" />
+      <Pagination :total="listTotal" :current-page="currentPage" @change="pageChange" />
     </div>
   </div>
 </template>

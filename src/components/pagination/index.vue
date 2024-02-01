@@ -4,6 +4,10 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  currentPage: {
+    type: Number,
+    default: 1,
+  },
   pagerCount: {
     type: Number,
     default: 7,
@@ -14,20 +18,20 @@ const showPrevMore = ref(false)
 const showNextMore = ref(false)
 const quickPrevHover = ref(false)
 const quickNextHover = ref(false)
-const currentPage = ref(1)
 const key = ref(1)
 
 const pages = computed(() => {
   const pagerCount = props.pagerCount
+  const _currentPage = props.currentPage
   const halfPagerCount = (pagerCount - 1) / 2
   const pageCount = Number(props.total)
   let showPrevMore = false
   let showNextMore = false
   if (pageCount > pagerCount) {
-    if (currentPage.value > pagerCount - halfPagerCount)
+    if (_currentPage > pagerCount - halfPagerCount)
       showPrevMore = true
 
-    if (currentPage.value < pageCount - halfPagerCount)
+    if (_currentPage < pageCount - halfPagerCount)
       showNextMore = true
   }
   const array: number[] = []
@@ -42,7 +46,7 @@ const pages = computed(() => {
   }
   else if (showPrevMore && showNextMore) {
     const offset = Math.floor(pagerCount / 2) - 1
-    for (let i = currentPage.value - offset; i <= currentPage.value + offset; i++)
+    for (let i = _currentPage - offset; i <= _currentPage + offset; i++)
       array.push(i)
   }
   else {
@@ -57,45 +61,45 @@ watchEffect(() => {
   showPrevMore.value = false
   showNextMore.value = false
   if (props.total! > props.pagerCount) {
-    if (currentPage.value > props.pagerCount - halfPagerCount)
+    if (props.currentPage > props.pagerCount - halfPagerCount)
       showPrevMore.value = true
-    if (currentPage.value < props.total! - halfPagerCount)
+    if (props.currentPage < props.total! - halfPagerCount)
       showNextMore.value = true
   }
 })
 
 const onPagerClick = (e: MouseEvent) => {
   const target = e.target as Element
+  let newCurrentPage = props.currentPage
   if (target.tagName.toLowerCase() === 'ul')
     return
   if (target.tagName.toLowerCase() !== 'li') {
     const li = target.closest('li') as HTMLLIElement
     if (Array.from(li.classList).includes('left')) {
-      if (currentPage.value <= 1)
+      if (newCurrentPage <= 1)
         return
-      currentPage.value--
-      key.value++
+      newCurrentPage--
     }
     if (Array.from(li.classList).includes('right')) {
-      if (currentPage.value === props.total)
+      if (newCurrentPage === props.total)
         return
-      currentPage.value++
-      key.value++
+      newCurrentPage++
     }
     if (Array.from(li.classList).includes('prev')) {
-      const newPage = currentPage.value - (props.pagerCount - 2)
-      currentPage.value = newPage > 0 ? newPage : 1
+      const newPage = newCurrentPage - (props.pagerCount - 2)
+      newCurrentPage = newPage > 0 ? newPage : 1
     }
     if (Array.from(li.classList).includes('next')) {
-      const newPage = currentPage.value + (props.pagerCount - 2)
-      currentPage.value = newPage > props.total ? props.total : newPage
+      const newPage = newCurrentPage + (props.pagerCount - 2)
+      newCurrentPage = newPage > props.total ? props.total : newPage
     }
-    emit('change', currentPage.value)
+    emit('change', newCurrentPage)
+    key.value++
   }
   else {
     const newPage = Number(target.textContent)
-    if (newPage !== currentPage.value) {
-      currentPage.value = newPage
+    if (newPage !== newCurrentPage) {
+      newCurrentPage = newPage
       key.value++
       emit('change', newPage)
     }
