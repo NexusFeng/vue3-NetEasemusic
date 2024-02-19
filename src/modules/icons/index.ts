@@ -9,12 +9,14 @@ import {
   Music,
   MusicCd,
   MusicMenu,
+  MusicRhythm,
   PlayOne,
   Right,
   Search,
   Theme,
   User,
   Video,
+  VideoTwo,
 } from '@icon-park/vue-next'
 
 export interface Icons {
@@ -37,6 +39,8 @@ export const icons: Icons = {
   IconDoubleLeft: DoubleLeft,
   IconDoubleRight: DoubleRight,
   IconMore: More,
+  IconVideoTwo: VideoTwo,
+  IconMusicRhythm: MusicRhythm,
 }
 export const install = (app: App) => {
   for (const key of Object.keys(icons))

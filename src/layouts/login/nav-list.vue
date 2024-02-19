@@ -10,6 +10,7 @@ const fixedList = [
 ]
 const menuItem: Ref = ref([])
 const router = useRouter()
+const userStore = useUserStore()
 const go = (name: string, index: number) => {
   menuItem.value.forEach((ref: HTMLElement, idx: number) => {
     if (index === idx)
@@ -17,11 +18,11 @@ const go = (name: string, index: number) => {
     else
       ref.classList.remove('text-var(--theme-color)', 'bg-var(--menu-item-active-bg)')
   })
+  userStore.setCurrentNav(name)
   router.push(`/song-list/${encodeURIComponent(name)}`)
 }
 
-const userStore = useUserStore()
-const { userId, playlist } = storeToRefs(userStore)
+const { userId, playlist, currentNav } = storeToRefs(userStore)
 const createList: Ref = ref([])
 const collectList: Ref = ref([])
 
@@ -31,7 +32,12 @@ watch(playlist, () => {
 }, { immediate: true })
 
 onMounted(() => {
-  menuItem.value[0].className += ' text-var(--theme-color) bg-var(--menu-item-active-bg)'
+  let currIndex = 0
+  fixedList.forEach((item: { key: string; name: string }, index: number): void => {
+    if (item.key === currentNav.value)
+      currIndex = index
+  })
+  menuItem.value[currIndex].className += ' text-var(--theme-color) bg-var(--menu-item-active-bg)'
 })
 </script>
 

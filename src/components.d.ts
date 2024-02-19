@@ -28,6 +28,7 @@ declare module '@vue/runtime-core' {
     Slide: typeof import('./components/slide/index.vue')['default']
     Slideshow: typeof import('./components/slideshow/index.vue')['default']
     SongCard: typeof import('./components/card/song-card.vue')['default']
+    SongList: typeof import('./components/card/song-list.vue')['default']
     Tabs: typeof import('./components/tabs/index.vue')['default']
     Theme: typeof import('./components/Theme.vue')['default']
   }

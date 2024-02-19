@@ -1,12 +1,15 @@
 <script lang="ts" setup>
-const props = withDefaults(defineProps<{ tabs: string[]; align: string; active: number }>(), {
+const props = withDefaults(defineProps<{ tabs: string[] | { title: string }[]; align: string; active: number }>(), {
   tabs: () => [],
   align: 'justify-end',
   active: 0,
 })
 const emit = defineEmits(['changeTab'])
+function isTitleObject(item: { title: string } | string): item is { title: string } {
+  return typeof item === 'object' && item !== null && 'title' in item
+}
 const tabArr = computed(() => {
-  return props.tabs
+  return !isTitleObject(props.tabs[0]) ? props.tabs.map(tab => ({ title: tab })) : props.tabs as { title: string }[]
 })
 const onChangeTab = (index: number) => {
   emit('changeTab', index)
@@ -25,7 +28,7 @@ const onChangeTab = (index: number) => {
       :class="[{ '!text-var(--theme-color)': active === index }, { 'hover:text-var(--tab-item-active-color)': active !== index }]"
       @click="onChangeTab(index)"
     >
-      <span class="title">{{ tab }}</span>
+      <span class="title">{{ tab.title }}</span>
     </li>
   </ul>
 </template>
