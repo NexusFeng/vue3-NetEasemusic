@@ -1,8 +1,9 @@
 <script lang="ts" setup>
-const props = withDefaults(defineProps<{ tabs: string[] | { title: string }[]; align: string; active: number }>(), {
+const props = withDefaults(defineProps<{ tabs: string[] | { title: string }[]; align?: string; active: number; type: string }>(), {
   tabs: () => [],
   align: 'justify-end',
   active: 0,
+  type: '',
 })
 const emit = defineEmits(['changeTab'])
 function isTitleObject(item: { title: string } | string): item is { title: string } {
@@ -14,6 +15,14 @@ const tabArr = computed(() => {
 const onChangeTab = (index: number) => {
   emit('changeTab', index)
 }
+const itemClass = (index: number) => {
+  const baseClass = 'py-3 mx-3 cursor-pointer text-xs text-var(--tab-item-color)'
+  const splitClass = 'text-sm !py-1 px-4 mx-4 rounded-full'
+  const split = index !== tabArr.value.length - 1 ? ' after:content-[\'\'] after:relative after:bg-var(--border) after:w-0.5 after:left-7 after:h-full after:inline-block after:align-middle' : ''
+  if (props.type === 'split')
+    return `${baseClass} ${splitClass}${split}`
+  return baseClass
+}
 </script>
 
 <template>
@@ -24,8 +33,10 @@ const onChangeTab = (index: number) => {
     <li
       v-for="(tab, index) in tabArr"
       :key="index"
-      class="py-3 mx-3 cursor-pointer text-xs text-var(--tab-item-color)"
-      :class="[{ '!text-var(--theme-color)': active === index }, { 'hover:text-var(--tab-item-active-color)': active !== index }]"
+      :class="[itemClass(index), { '!text-var(--theme-color)': active === index },
+               { 'hover:text-var(--tab-item-active-color)': active !== index },
+               { 'bg-var(--shallow-theme-bgcolor)': active === index && type === 'split' },
+      ]"
       @click="onChangeTab(index)"
     >
       <span class="title">{{ tab.title }}</span>

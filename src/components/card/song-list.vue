@@ -8,7 +8,7 @@ defineProps(['index', 'id', 'name', 'artistsText', 'durationSecond', 'albumName'
     <div class="w-16">
       {{ index > 9 ? index : (`0${index}`) }}
     </div>
-    <div class="w-30">
+    <div class="w-30 cursor-pointer">
       <div class="relative w-60px h-60px mr-4 shrink-0">
         <img v-lazy class="w-full h-full rounded" :data-src="img">
         <div class="absolute w-7 h-7 bg-white/[.45] rounded-full left-1/2 top-1/2 -translate-x-2/4 -translate-y-2/4 flex justify-center items-center">
@@ -21,7 +21,7 @@ defineProps(['index', 'id', 'name', 'artistsText', 'durationSecond', 'albumName'
         <div class="mr-1 truncate">
           {{ name }}
         </div>
-        <IconVideoTwo v-if="mvId" fill="#d33a31" />
+        <IconVideoTwo v-if="mvId" class="cursor-pointer" fill="#d33a31" />
       </div>
     </div>
     <div class="w-66 truncate pr-8">

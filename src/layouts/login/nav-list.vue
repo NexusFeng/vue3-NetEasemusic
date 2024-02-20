@@ -52,7 +52,7 @@ onMounted(() => {
       <IconMusicCd v-if="item.key === 'discovery'" class="w-6" />
       <IconMusicMenu v-if="item.key === 'recommend'" class="w-6" />
       <IconMusic v-if="item.key === 'newest-music'" class="w-6" />
-      <IconMusicCd v-if="item.key === 'newest-mv'" class="w-6" />
+      <IconVideoTwo v-if="item.key === 'newest-mv'" class="w-6" />
       <div class="text-13px">
         {{ item.name }}
       </div>

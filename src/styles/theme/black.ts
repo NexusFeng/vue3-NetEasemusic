@@ -27,4 +27,8 @@ export default {
   '--tab-item-active-color': '#fff',
 
   '--pagination-color': '#B1B1B1',
+
+  '--shallow-theme-bgcolor': '#2D2625',
+
+  '--border': '#3F3F3F',
 }
