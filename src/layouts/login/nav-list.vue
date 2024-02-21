@@ -22,6 +22,10 @@ const go = (name: string, index: number) => {
   router.push(`/song-list/${encodeURIComponent(name)}`)
 }
 
+const goSongList = (id: number) => {
+  router.push(`/list-detail?id=${encodeURIComponent(id)}`)
+}
+
 const { userId, playlist, currentNav } = storeToRefs(userStore)
 const createList: Ref = ref([])
 const collectList: Ref = ref([])
@@ -61,7 +65,12 @@ onMounted(() => {
       <div class="p-4 text-xs">
         创建的歌单
       </div>
-      <div v-for="item in createList" :key="item.id" class="flex items-center cursor-pointer p-4 hover:bg-var(--menu-item-hover-bg)">
+      <div
+        v-for="item in createList"
+        :key="item.id"
+        class="flex items-center cursor-pointer p-4 hover:bg-var(--menu-item-hover-bg)"
+        @click="goSongList(item.id)"
+      >
         <IconMusicMenu class="w-6" />
         <div class="w-full truncate text-13px">
           {{ item.name }}
@@ -72,7 +81,12 @@ onMounted(() => {
       <div class="p-4 text-xs">
         收藏的歌单
       </div>
-      <div v-for="item in collectList" :key="item.id" class="flex items-center cursor-pointer p-4 hover:bg-var(--menu-item-hover-bg)">
+      <div
+        v-for="item in collectList"
+        :key="item.id"
+        class="flex items-center cursor-pointer p-4 hover:bg-var(--menu-item-hover-bg)"
+        @click="goSongList(item.id)"
+      >
         <IconMusicMenu class="w-6" />
         <div class="w-full truncate text-13px">
           {{ item.name }}
