@@ -2,6 +2,7 @@
 export default {
   '--global-bg-color': '#FFFFFF',
   '--font-color': '#4a4a4a',
+  '--font-color-white': '#333333',
   // 头部
   '--header-bg-color': '#F9F9F9',
   '--header-font-color': '#D33A31',

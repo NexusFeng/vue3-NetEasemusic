@@ -4,6 +4,7 @@ export default {
   ...variables,
   '--global-bg-color': '#252525',
   '--font-color': '#b1b1b1',
+  '--font-color-white': '#dcdde4',
   // 头部样式
   '--header-bg-color': '#252525',
   '--header-font-color': '#B1B1B1',

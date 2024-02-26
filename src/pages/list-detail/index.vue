@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import Header from './header.vue'
 import { getListDetail, getSongDetail } from '~/api/song-list'
 import { createSong } from '~/utils/util'
 
@@ -11,7 +12,7 @@ const MAX = 500
 // const SONG_IDX = 0
 // const COMMENT_IDX = 1
 const playlists = ref({})
-// const song = ref([])
+const songs = ref([])
 
 const genSonglist = async (playlist) => {
   const trackIds = playlist.trackIds.map(({ id }) => id)
@@ -43,5 +44,5 @@ watch(id, () => {
 </script>
 
 <template>
-  <div>{{ id }}</div>
+  <Header :playlists="playlists" :songs="songs" />
 </template>
