@@ -1,28 +1,37 @@
 <script setup lang="ts">
-const props = defineProps(['playlist', 'songs'])
+import { formatDate } from '~/utils/util'
+const props = defineProps({
+  playlists: {
+    type: Object,
+    default: () => {},
+  },
+  songs: {
+    type: Array,
+    default: () => [],
+  },
+})
 
-const tagsText = computed(() => props.playlist.tags.join('/'))
+const tagsText = computed(() => props.playlists.tags.join('/'))
 </script>
 
 <template>
-  <div v-if="playlist.id" class="flex p-7">
+  <div v-if="playlists.id" class="flex p-7">
     <div class="w-50 h-50 ml-7">
-      <img class="w-full h-full" :src="playlist.coverImgUrl">
+      <img class="w-full h-full" :src="playlists.coverImgUrl">
     </div>
     <div class="flex flex-col justify-between flex-1">
       <div class="flex items-center mb-3">
         <p class="text-base text-var(--font-color-white)">
-          {{ playlist.name }}
+          {{ playlists.name }}
         </p>
       </div>
       <div class="flex items-center mb-4">
-        <img :src="playlist.creator.avatarUrl" class="w-8 h-8 mr-2 rounded-full">
+        <img :src="playlists.creator.avatarUrl" class="w-8 h-8 mr-2 rounded-full">
         <p class="mr-2">
-          {{ playlist.creator.nickname }}
+          {{ playlists.creator.nickname }}
         </p>
         <p class="text-xs">
-          {{ playlist.createTime }}
-          <!-- {{ $utils.formatDate(playlist.createTime, "yyyy-MM-dd") }} 创建 -->
+          {{ formatDate(playlists.createTime, 'yyyy-MM-dd') }}创建
         </p>
       </div>
       <div class="mb-7">
@@ -35,8 +44,8 @@ const tagsText = computed(() => props.playlist.tags.join('/'))
         <p v-if="tagsText" class="mb-2">
           <span>标签：{{ tagsText }}</span>
         </p>
-        <p v-if="playlist.description" class="mb-2">
-          <span class="line-clamp-3 truncate">简介：{{ playlist.description }}</span>
+        <p v-if="playlists.description" class="mb-2">
+          <span class="line-clamp-3 truncate">简介：{{ playlists.description }}</span>
         </p>
       </div>
     </div>

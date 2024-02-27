@@ -14,7 +14,7 @@ const MAX = 500
 const playlists = ref({})
 const songs = ref([])
 
-const genSonglist = async (playlist) => {
+const genSonglist = async (playlist: any) => {
   const trackIds = playlist.trackIds.map(({ id }) => id)
   const songDetails = await getSongDetail(trackIds.slice(0, MAX))
   const songs = songDetails.songs.map(({ id, name, al, ar, mv, dt }) =>
