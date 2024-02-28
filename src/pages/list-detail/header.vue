@@ -16,7 +16,7 @@ const tagsText = computed(() => props.playlists.tags.join('/'))
 
 <template>
   <div v-if="playlists.id" class="flex p-7">
-    <div class="w-50 h-50 ml-7">
+    <div class="w-50 h-50 mr-7">
       <img class="w-full h-full" :src="playlists.coverImgUrl">
     </div>
     <div class="flex flex-col justify-between flex-1">
@@ -35,9 +35,9 @@ const tagsText = computed(() => props.playlists.tags.join('/'))
         </p>
       </div>
       <div class="mb-7">
-        <div class="bg-[#f95043] text-[#fbdfdd] border-0 bg-gradient-to-r from-[#fa5143] via-[#f44d41] to-[#d53b32]">
-          <Icon class="mr-1 align-middle" color="white" type="play-round" />
-          <span class="align-middle">播放全部</span>
+        <div class="w-28 rounded-md cursor-pointer flex justify-center p-1 items-center bg-[#f95043] text-[#fbdfdd] border-0 bg-gradient-to-r from-[#fa5143] via-[#f44d41] to-[#d53b32]">
+          <IconPlay size="18" fill="#fff" />
+          <span class="align-middle ml-2">播放全部</span>
         </div>
       </div>
       <div class="mb-5">

@@ -23,6 +23,9 @@ const go = (name: string, index: number) => {
 }
 
 const goSongList = (id: number) => {
+  menuItem.value.forEach((ref: HTMLElement, idx: number) => {
+    ref.classList.remove('text-var(--theme-color)', 'bg-var(--menu-item-active-bg)')
+  })
   router.push(`/list-detail?id=${encodeURIComponent(id)}`)
 }
 
