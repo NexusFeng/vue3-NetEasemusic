@@ -9,6 +9,12 @@ const fixedList = [
   { key: 'newest-mv', name: '最新MV' },
 ]
 const menuItem: Ref = ref([])
+const collectSongList: Ref = ref([])
+const menu: Ref = ref({
+  menuItem: [],
+  collectSongList: [],
+  createSongList: [],
+})
 const router = useRouter()
 const userStore = useUserStore()
 const go = (name: string, index: number) => {
@@ -22,7 +28,7 @@ const go = (name: string, index: number) => {
   router.push(`/song-list/${encodeURIComponent(name)}`)
 }
 
-const goSongList = (id: number) => {
+const goSongList = (id: number, index: number) => {
   menuItem.value.forEach((ref: HTMLElement, idx: number) => {
     ref.classList.remove('text-var(--theme-color)', 'bg-var(--menu-item-active-bg)')
   })
@@ -52,7 +58,7 @@ onMounted(() => {
   <div class="h-[calc(100%-85px)] overflow-y-scroll">
     <div
       v-for="(item, index) in fixedList" :key="item.key"
-      ref="menuItem"
+      :ref="menu.menuItem"
       class="flex items-center cursor-pointer p-4 hover:bg-var(--menu-item-hover-bg)"
       @click="go(item.key, index)"
     >
@@ -69,10 +75,11 @@ onMounted(() => {
         创建的歌单
       </div>
       <div
-        v-for="item in createList"
+        v-for="(item, index) in createList"
+        ref="createSongList"
         :key="item.id"
         class="flex items-center cursor-pointer p-4 hover:bg-var(--menu-item-hover-bg)"
-        @click="goSongList(item.id)"
+        @click="goSongList(item.id, index)"
       >
         <IconMusicMenu class="w-6" />
         <div class="w-full truncate text-13px">
@@ -85,10 +92,11 @@ onMounted(() => {
         收藏的歌单
       </div>
       <div
-        v-for="item in collectList"
+        v-for="(item, index) in collectList"
         :key="item.id"
+        ref="collectSongList"
         class="flex items-center cursor-pointer p-4 hover:bg-var(--menu-item-hover-bg)"
-        @click="goSongList(item.id)"
+        @click="goSongList(item.id, index)"
       >
         <IconMusicMenu class="w-6" />
         <div class="w-full truncate text-13px">
